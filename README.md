@@ -4,11 +4,23 @@ A **read-only**, menu-driven terminal reference for Hyprland, Noctalia, CachyOS/
 
 ## Quick start
 
+Clone the public repository using HTTPS (no GitHub account required to clone):
+
 ```bash
-unzip linux-command-cheatsheet.zip
-cd linux-command-cheatsheet
+git clone https://github.com/chabymanow/linux_commands.git
+cd linux_commands
 ./help.sh
 ```
+
+If you already use SSH keys with GitHub, you can clone over SSH instead:
+
+```bash
+git clone git@github.com:chabymanow/linux_commands.git
+cd linux_commands
+./help.sh
+```
+
+Requires Bash, Python 3 and Git for the clone step. The cheat sheet itself displays reference commands without executing them.
 
 ## Other ways to use
 
