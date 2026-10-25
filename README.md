@@ -18,6 +18,7 @@ If you already use SSH keys with GitHub, you can clone over SSH instead:
 ```bash
 git clone git@github.com:chabymanow/linux_commands.git
 cd linux_commands
+chmod +x syscompass
 ./syscompass
 ```
 
