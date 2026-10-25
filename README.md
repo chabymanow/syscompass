@@ -1,4 +1,4 @@
-# Linux Command Cheat Sheet
+# SysCompass — Linux Command Cheat Sheet
 
 A **read-only**, menu-driven terminal reference for Hyprland, Noctalia, CachyOS/Arch, desktop appearance, and system diagnostics. All 11 subjects have standalone Bash scripts.
 
@@ -9,7 +9,8 @@ Clone the public repository using HTTPS (no GitHub account required to clone):
 ```bash
 git clone https://github.com/chabymanow/linux_commands.git
 cd linux_commands
-./help.sh
+chmod +x syscompass
+./syscompass
 ```
 
 If you already use SSH keys with GitHub, you can clone over SSH instead:
@@ -17,7 +18,7 @@ If you already use SSH keys with GitHub, you can clone over SSH instead:
 ```bash
 git clone git@github.com:chabymanow/linux_commands.git
 cd linux_commands
-./help.sh
+./syscompass
 ```
 
 Requires Bash, Python 3 and Git for the clone step. The cheat sheet itself displays reference commands without executing them.
@@ -25,8 +26,8 @@ Requires Bash, Python 3 and Git for the clone step. The cheat sheet itself displ
 ## Other ways to use
 
 ```bash
-./help.sh 5        # Monitors
-./help.sh --all    # Print entire cheat sheet
+./syscompass 5        # Monitors
+./syscompass --all    # Print entire cheat sheet
 ./sections/11-system.sh
 ```
 
