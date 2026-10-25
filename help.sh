@@ -38,10 +38,10 @@ show_menu() {
   inner=$((cols - 4))
 
   # Complete, correctly aligned box. All padding is inside the right border.
-  printf '\n  %s╭%s╮%s\n' "$purple" "$(printf '%*s' "$inner" '' | tr ' ' '─')" "$reset"
+  printf '\n  %s╭%s╮%s\n' "$purple" "$(printf '─%.0s' $(seq 1 "$inner"))" "$reset"
   printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$cream" "$((inner-2))" "LINUX COMMAND CHEAT SHEET" "$reset" "$purple" "$reset"
   printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$dim" "$((inner-2))" "Hyprland · Noctalia · CachyOS · System Tools" "$reset" "$purple" "$reset"
-  printf '  %s╰%s╯%s\n\n' "$purple" "$(printf '%*s' "$inner" '' | tr ' ' '─')" "$reset"
+  printf '  %s╰%s╯%s\n\n' "$purple" "$(printf '─%.0s' $(seq 1 "$inner"))" "$reset"
 
   for i in "${!scripts[@]}"; do
     label="$(pretty_label "${scripts[i]}")"
