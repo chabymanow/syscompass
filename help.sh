@@ -31,17 +31,18 @@ pretty_label() {
 }
 
 show_menu() {
-  local i label cols
+  local i label cols inner
   cols="$(tput cols 2>/dev/null || printf 80)"
   (( cols > 78 )) && cols=78
-  printf '\n  %s╭' "$purple"
-  printf '─%.0s' $(seq 1 $((cols - 4)))
-  printf '╮%s\n' "$reset"
-  printf '  %s│%s  %sLINUX COMMAND CHEAT SHEET%s\n' "$purple" "$reset" "$cream" "$reset"
-  printf '  %s│%s  %sHyprland · Noctalia · CachyOS · System Tools%s\n' "$purple" "$reset" "$dim" "$reset"
-  printf '  %s├' "$purple"
-  printf '─%.0s' $(seq 1 $((cols - 4)))
-  printf '┤%s\n\n' "$reset"
+  (( cols < 52 )) && cols=52
+  inner=$((cols - 4))
+
+  # Complete, correctly aligned box. All padding is inside the right border.
+  printf '\n  %s╭%s╮%s\n' "$purple" "$(printf '%*s' "$inner" '' | tr ' ' '─')" "$reset"
+  printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$cream" "$((inner-2))" "LINUX COMMAND CHEAT SHEET" "$reset" "$purple" "$reset"
+  printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$dim" "$((inner-2))" "Hyprland · Noctalia · CachyOS · System Tools" "$reset" "$purple" "$reset"
+  printf '  %s╰%s╯%s\n\n' "$purple" "$(printf '%*s' "$inner" '' | tr ' ' '─')" "$reset"
+
   for i in "${!scripts[@]}"; do
     label="$(pretty_label "${scripts[i]}")"
     printf '    %s%02d%s   %s%-43s%s\n' "$purple" "$((i+1))" "$reset" "$green" "$label" "$reset"
