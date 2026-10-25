@@ -30,18 +30,27 @@ pretty_label() {
   printf '%s' "$label"
 }
 
+header_line() {
+  local message="$1" tone="$2" measure padding
+  # Bash printf field width can count UTF-8 bytes rather than terminal cells.
+  # Measure middle dots as single-column characters before adding padding.
+  measure="${message//·/.}"
+  padding=$(( header_inner - 2 - ${#measure} ))
+  (( padding < 0 )) && padding=0
+  printf '  %s│%s  %s%s%s%*s%s│%s\n' "$purple" "$reset" "$tone" "$message" "$reset" "$padding" '' "$purple" "$reset"
+}
+
 show_menu() {
-  local i label cols inner
+  local i label cols header_inner
   cols="$(tput cols 2>/dev/null || printf 80)"
   (( cols > 78 )) && cols=78
   (( cols < 52 )) && cols=52
-  inner=$((cols - 4))
+  header_inner=$((cols - 4))
 
-  # Complete, correctly aligned box. All padding is inside the right border.
-  printf '\n  %s╭%s╮%s\n' "$purple" "$(printf '─%.0s' $(seq 1 "$inner"))" "$reset"
-  printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$cream" "$((inner-2))" "LINUX COMMAND CHEAT SHEET" "$reset" "$purple" "$reset"
-  printf '  %s│%s  %s%-*s%s%s│%s\n' "$purple" "$reset" "$dim" "$((inner-2))" "Hyprland · Noctalia · CachyOS · System Tools" "$reset" "$purple" "$reset"
-  printf '  %s╰%s╯%s\n\n' "$purple" "$(printf '─%.0s' $(seq 1 "$inner"))" "$reset"
+  printf '\n  %s╭%s╮%s\n' "$purple" "$(printf '─%.0s' $(seq 1 "$header_inner"))" "$reset"
+  header_line "LINUX COMMAND CHEAT SHEET" "$cream"
+  header_line "Hyprland · Noctalia · CachyOS · System Tools" "$dim"
+  printf '  %s╰%s╯%s\n\n' "$purple" "$(printf '─%.0s' $(seq 1 "$header_inner"))" "$reset"
 
   for i in "${!scripts[@]}"; do
     label="$(pretty_label "${scripts[i]}")"
